@@ -1,9 +1,9 @@
 class Employee:
-
-    increment = 1.04 # class variable
+    """ class variable """
+    increment = 1.04
 
     def __init__(self, first_name, last_name, email, payment):
-        # initialize instance variables
+        """ initialize instance variables """
         self.first_name = first_name;
         self.last_name = last_name;
         self.email = email;
@@ -13,7 +13,8 @@ class Employee:
         return '{} {}'.format(self.first_name, self.last_name)
 
     def apply_raise(self):
-        self.payment = self.payment * self.increment #Access class attribute by instance
+        """ Access class attribute by instance """
+        self.payment = self.payment * self.increment
 
 
 
