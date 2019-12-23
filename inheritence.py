@@ -18,12 +18,58 @@ class Employee:
 
 class Developer(Employee):
     increment = 1.06
-    pass
 
-dev_one = Developer("Newaz", "Sharif", "newazsharif.dsi@gmail.com", 12000)
+    def __init__(self, first_name, last_name, email, payment, prog_lang):
+        super().__init__(first_name, last_name, email, payment)
+        self.prog_lang = prog_lang
 
-print(dev_one.full_name())
-print(dev_one.payment)
-dev_one.apply_raise()
-print(dev_one.payment)
+class Manager(Employee):
 
+    def __init__(self, first_name, last_name, email, payment, employees = None):
+        super().__init__(first_name, last_name, email, payment)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
+
+    def add_employee(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_employee(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_employee(self):
+        for emp in self.employees:
+            print('--> ',emp.full_name())
+
+
+dev_one = Developer("Newaz", "Sharif", "newazsharif.dsi@gmail.com", 12000, "Java")
+# print(dev_one.__dict__)
+
+dev_two = Developer("Dev2", "Sharif", "dev2sharif.dsi@gmail.com", 10000, "Python")
+# print(dev_two.__dict__)
+
+dev_three = Developer("Dev3", "Sharif", "dev3sharif.dsi@gmail.com", 20000, "C++")
+# print(dev_three.__dict__)
+
+
+mgr_one = Manager("General", "Manager", "gm.dsi@gmail.com", 62000, [dev_one,dev_two])
+# mgr_one.print_employee()
+
+mgr_one.add_employee(dev_three)
+mgr_one.print_employee()
+
+mgr_one.remove_employee(dev_one)
+mgr_one.print_employee()
+
+#instance check
+print(isinstance(mgr_one, Manager))
+print(isinstance(mgr_one, Employee))
+print(isinstance(mgr_one, Developer))
+
+
+#Subclass check
+print(issubclass(Manager, Developer))
+print(issubclass(Manager, Employee))
